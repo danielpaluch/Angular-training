@@ -1,0 +1,11 @@
+<div class="search-wrapper">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Id użytkownika</mat-label>
+      <input matInput placeholder="np. 3" name="userId" [(ngModel)]="userId" min="0">
+      <a matSuffix mat-raised-button color="primary" type="submit" [routerLink]="['/user', userId]"
+        [disabled]="userId < 0">Szukaj</a>
+    </mat-form-field>
+  </form>
+</div>
+<button class="error" *ngIf="userId < 0" mat-raised-button color="warn">Wartość musi być dodatnia</button>

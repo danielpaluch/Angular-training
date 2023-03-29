@@ -1,0 +1,60 @@
+<div *ngIf="user" class="content">
+    <div class="initials">
+        <a matSuffix mat-raised-button color="primary" type="submit" routerLink="user">Wróć</a>
+        <h1 >Welcome back {{user_initials}}!</h1>
+    </div>
+    <div class="columns">
+        <div class="first--column">
+            <mat-card>
+                <mat-card-header>Initials:</mat-card-header>
+                <mat-card-content>{{user_initials}}</mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>User:</mat-card-header>
+                <mat-card-content>{{user.name}}</mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>Adress:</mat-card-header>
+                <mat-card-content>{{user_adress.street}} {{user_adress.suite}}</mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>City:</mat-card-header>
+                <mat-card-content>{{user_adress.city}}</mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>Albums:</mat-card-header>
+                <mat-card-content>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose album</mat-label>
+                        <mat-select [(value)]="albumId" (selectionChange)="changeLink()">
+                          <mat-option *ngFor="let album of albums"  [value]="album.id">
+                            {{album.title}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="second--column" *ngIf="photos">
+            <mat-card>
+                <mat-card-header><h1>Photos {{start}} - {{start+4}}</h1></mat-card-header>
+                <mat-card-content *ngFor="let photo of photos">
+                    <button mat-button color="accent" (click)="showPhoto(photo.url)">{{photo.title}}</button>
+                </mat-card-content>
+                <mat-card-footer>
+                    <button mat-raised-button color="warn" (click)="photosBack()"><</button>
+                    <button mat-raised-button color="warn" (click)="photosForward()">></button>
+                </mat-card-footer>
+            </mat-card>
+
+
+            
+        </div>
+    </div>
+    <div *ngIf="shownPhotos" class="photos">
+        <img class="photo" *ngFor="let photo of shownPhotos" [src]="photo" (click)="changeWidth($event)">
+    </div>
+</div>
+
+
+
