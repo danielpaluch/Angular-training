@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from 'src/app/model/user';
-import { Album } from 'src/app/model/album';
 
 @Component({
   selector: 'app-user-profile',
@@ -27,13 +26,14 @@ export class UserProfileComponent {
   shownPhotos: Array<string> = [];
   start = 0;
 
-
+  // CHANGING LINKS
   changeLink() {
     this.location.replaceState(`user/${this.userId}/album/${this.albumId}`);
     this.userService.getPhotosFromAlbums(this.albumId, this.start).subscribe(photosOfAlbum => {
       this.photos = photosOfAlbum;
     })
   }
+  // PAGINATION
   photosBack() {
     if (this.start - 4 >= 0) {
       this.start = this.start - 4;
@@ -48,6 +48,7 @@ export class UserProfileComponent {
       this.photos = photosOfAlbum;
     })
   }
+  // PHOTOS ACTION
   showPhoto(value: string) {
     const alreadyPlaced = this.shownPhotos.filter(element => element == value);
     if (alreadyPlaced.length == 0) {
@@ -68,7 +69,7 @@ export class UserProfileComponent {
     this.route.params.subscribe(params => {
         this.userId = params['id'];
         this.albumId = params['albumId']
-        if (this.userId < 0 || this.userId == undefined) {
+        if (this.userId < 0 || this.userId == undefined) { // USER WAS NOT FOUND
         this.router.navigateByUrl('/user');
         }
     });

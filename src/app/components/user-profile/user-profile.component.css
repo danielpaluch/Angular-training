@@ -64,10 +64,27 @@ mat-card-footer button {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    min-height: 100px;
 }
 
 .photo {
     width: 20px;
     height: 20px;
     margin: 5px;
+}
+@media screen and (max-width: 800px)  {
+    .initials{
+        margin-top: 10%;
+    }
+    .content{
+        height: auto;
+    }
+    .columns{
+        flex-direction: column;
+    }
+    .first--column,
+    .second--column {
+        justify-content: center;
+        width: 90%;
+    }
 }

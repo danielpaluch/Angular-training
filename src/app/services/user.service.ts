@@ -19,7 +19,7 @@ export class UserService {
     return this.http.get<User>(`${this.url}/${userId}`);
   }
   getUserAlbums(userId: number): Observable<Album> {
-    return this.http.get<Album>(`${this.url}/${userId}/albums`);
+    return this.http.get<Album>(`${this.url}/${userId}/albums?_start=0&_limit=3`);
   }
   getPhotosFromAlbums(albumId: number, start: number): Observable<Photo> {
     return this.http.get<Photo>(`${this.albumUrl}/${albumId}/photos?_start=${start}&_limit=4`);
